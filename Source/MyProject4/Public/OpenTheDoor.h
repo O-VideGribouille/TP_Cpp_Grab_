@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-//#include "Engine/TriggerVolume.h"// pas besoin d'autre bibliothèque
-//#include "PhysicsEngine/PhysicsHandleComponent.h"
+#include "Engine/TriggerVolume.h"
+//#include "PhysicsEngine/PhysicsHandleComponent.h" // pas besoin d'autre bibliothèque
 #include "OpenTheDoor.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDoorEvent);
@@ -37,13 +37,15 @@ public:
 
 	void Closedoor();
 
-	float flt_GetToMass;
+	float flt_GetToMass();
 
 
 private :
-	//UPROPERTY(EditAnywhere)
-		//ATriggerVolume* Atggr_Trigger = nullptr;
+	UPROPERTY(EditAnywhere)
+		ATriggerVolume* Atggr_Trigger = nullptr;
 
-
+	UPROPERTY(EditAnywhere)
+		float flt_MaxMass;
+	
 		
 };

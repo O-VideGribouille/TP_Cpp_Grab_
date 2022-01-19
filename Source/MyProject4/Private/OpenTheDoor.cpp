@@ -1,7 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
+#include "Components/PrimitiveComponent.h"
 #include "OpenTheDoor.h"
+
 
 // Sets default values for this component's properties
 UOpenTheDoor::UOpenTheDoor()
@@ -30,8 +32,27 @@ void UOpenTheDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+	if(Atggr_Trigger) {
 
+		/*for each (object var in collection_to_loop)
+		{*/
 
+		float flt_TMass = flt_GetToMass();
+
+		UE_LOG(LogTemp, Warning, TEXT("%d"), flt_MaxMass);
+
+			if(flt_TMass >= flt_MaxMass) {
+
+				OpenDoor();
+			}
+			else
+			{
+				Closedoor();
+			}
+
+		//}
+	}
+	
 }
 
 void UOpenTheDoor::OpenDoor()
@@ -42,6 +63,22 @@ void UOpenTheDoor::OpenDoor()
 void UOpenTheDoor::Closedoor()
 {
 	CloseDoorRequest.Broadcast();
+}
+
+float UOpenTheDoor::flt_GetToMass()
+{
+	
+	float flt_TMass = 0.0f;
+
+	TArray<AActor*> ActorCollision;
+	Atggr_Trigger->GetOverlappingActors(ActorCollision);
+	
+	for (AActor* Actor : ActorCollision)
+	{
+		flt_TMass += Actor->FindComponentByClass<UPrimitiveComponent>()->GetMass();
+	}
+
+	return flt_TMass;
 }
 
 
