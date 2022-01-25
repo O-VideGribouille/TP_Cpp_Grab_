@@ -59,7 +59,7 @@ void UGrabber::Grab()
 	FVector End = FV_returnEnd();
 
 
-	DrawDebugLine(GetWorld(), Start, End, FColor::Blue, false, 2.0, 0, 10);
+	//DrawDebugLine(GetWorld(), Start, End, FColor::Blue, false, 2.0, 0, 10);
 
 	FHitResult Hit;
 	FCollisionQueryParams TraceParams(FName(TEXT("")), false, GetOwner());
