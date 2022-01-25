@@ -12,3 +12,11 @@ Saved
 *.suo
 *.xcodeproj
 *.xcworkspace
+
+
+/Content/StarterContent/
+/Content/Megascan/
+/Content/MSPresets/
+
+/Content/Stylized_Forest/
+/Content/Underground/
