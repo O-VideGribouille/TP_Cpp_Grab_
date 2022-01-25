@@ -50,7 +50,12 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 void UGrabber::Grab()
 {
 	UE_LOG(LogTemp, Warning, TEXT("GRAB"));
-	FVector Start = GetOwner()->GetActorLocation();
+	//FVector Start = GetOwner()->GetActorLocation();
+	FVector PlayerViewPointLocation;
+	FRotator PlayerViewPointRotation;
+
+	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT PlayerViewPointLocation, OUT PlayerViewPointRotation);
+	FVector Start = PlayerViewPointLocation;
 	FVector End = FV_returnEnd();
 
 
@@ -89,7 +94,12 @@ void UGrabber::Release()
 
 FVector UGrabber::FV_returnEnd()
 {
-	
-	return GetOwner()->GetActorForwardVector() * flt_Distance + GetOwner()->GetActorLocation();
+	FVector PlayerViewPointLocation;
+	FRotator PlayerViewPointRotation;
+
+	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT PlayerViewPointLocation, OUT PlayerViewPointRotation);
+
+	return PlayerViewPointLocation + PlayerViewPointRotation.Vector() * flt_Distance;
+	//return GetOwner()->GetActorForwardVector() * flt_Distance + GetOwner()->GetActorLocation();
 }
 
